@@ -1,0 +1,272 @@
+/**
+ * Keyframe Animations & Transitions
+ * Bizumuremyi Augustin Portfolio - Decorated Electric & Royal Blue Edition
+ */
+
+/* ================= Custom Target Cursor Animations ================= */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-blue-primary, #00D2FF);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 0 12px var(--color-blue-primary, #00D2FF);
+}
+
+.custom-cursor-target {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+/* Reticle corner brackets */
+.custom-cursor-target .target-corner {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: var(--color-blue-light, #38BDF8);
+  border-style: solid;
+  transition: all 0.2s ease;
+}
+
+.custom-cursor-target .target-corner.tl {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.custom-cursor-target .target-corner.tr {
+  top: 0;
+  right: 0;
+  border-width: 2px 2px 0 0;
+}
+
+.custom-cursor-target .target-corner.bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 2px 2px;
+}
+
+.custom-cursor-target .target-corner.br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+.custom-cursor-target .target-reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(56, 189, 248, 0.4);
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+/* Hovering Interactive Elements */
+.custom-cursor-target.hovering {
+  width: 54px;
+  height: 54px;
+}
+
+.custom-cursor-target.hovering .target-corner {
+  width: 10px;
+  height: 10px;
+  border-color: var(--color-blue-primary, #00D2FF);
+}
+
+.custom-cursor-target.hovering .target-reticle {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--color-blue-primary, #00D2FF);
+  animation: reticleSpin 6s linear infinite;
+}
+
+.custom-cursor-dot.hovering {
+  width: 8px;
+  height: 8px;
+  background-color: #38BDF8;
+  box-shadow: 0 0 16px #00D2FF;
+}
+
+.custom-cursor-target.clicking {
+  transform: scale(0.8) !important;
+}
+
+@keyframes reticleSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ================= Revolving Bright Blue Ring Animation ================= */
+@keyframes revolveBrightRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes revolveCounter {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes orbitParticleMotion {
+  0% {
+    transform: rotate(0deg) translateX(190px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(190px) rotate(-360deg);
+  }
+}
+
+@keyframes bluePulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.4), inset 0 0 25px rgba(0, 210, 255, 0.3);
+    filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.6));
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(56, 189, 248, 0.7), inset 0 0 35px rgba(56, 189, 248, 0.5);
+    filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.9));
+  }
+}
+
+.revolving-blue-ring {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #00D2FF, #38BDF8, #2563EB, #00F5D4, transparent 65%, #00D2FF);
+  animation: revolveBrightRing 7s linear infinite;
+  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), black calc(100% - 4px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.revolving-blue-ring-outer {
+  position: absolute;
+  inset: -24px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(56, 189, 248, 0.35);
+  animation: revolveCounter 14s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.orbit-sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 16px #00D2FF, 0 0 30px #00F5D4;
+  animation: orbitParticleMotion 7s linear infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ================= Reveal on Scroll Animations ================= */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Scale in variant */
+.scale-reveal {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scale-reveal.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Float Animation */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-element {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+/* Shimmer Loading Skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-bg-card) 25%, var(--color-border) 50%, var(--color-bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+/* Modal Entrance */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-animate-in {
+  animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bizumuremyi Augustin | Videographer, Photographer & Media Specialist</title>
+  <meta name="description" content="Portfolio of Bizumuremyi Augustin - Videographer, Photographer, Media Specialist, & Humanities Student at Liquidnet Family High School @ ASYV, Rwanda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="#hero" class="nav-brand">
+        <div class="brand-badge">BA</div>
+        <span>Augustin<span class="blue-text">.</span></span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#gallery" class="nav-link">Showcase</a></li>
+        <li><a href="#leadership" class="nav-link">Leadership</a></li>
+        <li><a href="#passions" class="nav-link">Passions</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Dark / Light Theme" title="Toggle Theme">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+
+        <!-- Admin Access Button -->
+        <button class="btn btn-admin" id="openAdminBtn" title="Admin Control Panel">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Admin</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-glow-bg"></div>
+    <div class="hero-glow-left"></div>
+    <div class="container hero-grid">
+      
+      <!-- Left Hero Content -->
+      <div class="hero-content reveal-on-scroll">
+        <p class="script-greeting" id="heroGreeting">Hello, I'm</p>
+        <h1 class="hero-name" id="heroName">
+          BIZUMUREMYI<br>
+          <span class="blue-gradient-text">AUGUSTIN</span>
+        </h1>
+
+        <div class="hero-tags" id="heroTags">
+          <span>VIDEOGRAPHER</span> • 
+          <span>PHOTOGRAPHER</span> • 
+          <span>MEDIA SPECIALIST</span> • 
+          <span>HUMANITIES</span>
+        </div>
+
+        <p class="hero-headline-sub" id="heroHeadline">
+          Crafting Cinematic Stories & Capturing Powerful Moments
+        </p>
+
+        <p class="hero-subheadline" id="heroSubheadline">
+          Media creator, visual storyteller, and humanities student at Liquidnet Family High School (ASYV). Dedicated to community impact, documentary video production, and sound engineering across Rwanda.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#gallery" class="btn btn-primary">
+            <i class="fa-solid fa-play"></i>
+            <span>EXPLORE SHOWCASE</span>
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <span>GET IN TOUCH</span>
+          </a>
+        </div>
+
+        <div class="hero-quick-contacts">
+          <div class="quick-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span id="heroPhone">0792721384</span>
+          </div>
+          <div class="quick-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="heroLocation">Gisagara District, Rwanda</span>
+          </div>
+          <div class="quick-contact-item">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span id="heroLevel">Senior Four (S4) • Class of 2028</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Owner Portrait with Revolving Bright Blue Ring -->
+      <div class="hero-portrait-col reveal-on-scroll delay-200">
+        <div class="hero-portrait-wrapper">
+          <!-- Animated Revolving Bright Blue Ring -->
+          <div class="revolving-blue-ring"></div>
+          <div class="revolving-blue-ring-outer"></div>
+          <div class="orbit-sparkle"></div>
+
+          <div class="portrait-circle-frame">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Bizumuremyi Augustin" id="heroProfileImg">
+          </div>
+
+          <!-- Floating Badges -->
+          <div class="floating-badge badge-top-right">
+            <i class="fa-solid fa-award"></i>
+            <div>
+              <strong>1st Place Winner</strong>
+              <span>Inspiring in Media & Video</span>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-bottom-left">
+            <i class="fa-solid fa-camera"></i>
+            <div>
+              <strong>Media Specialist</strong>
+              <span>Liquidnet High School @ ASYV</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. About & Background Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-info-col reveal-on-scroll">
+          <span class="section-tag">Biography & Academic Profile</span>
+          <h2 class="section-title">Rooted in <span class="blue-gradient-text">Humanities & Media</span></h2>
+          <p class="about-bio-text" id="aboutBio">
+            Bizumuremyi Augustin is a dedicated Senior Four student currently pursuing his secondary education at Liquidnet Family High School located within Agahozo Shalom Youth Village. Balancing deep academic curiosity with high-energy visual production, Augustin captures the pulse of student initiatives, cultural storytelling, and community service across Rwanda.
+          </p>
+
+          <div class="about-card">
+            <h3 style="font-size: 1.15rem; margin-bottom: 1.25rem;">Academic Credentials</h3>
+            <div class="about-details-list">
+              <div class="detail-item">
+                <span class="detail-label">Institution</span>
+                <span class="detail-value" id="profileSchool">Liquidnet Family High School @ ASYV</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Academic Level</span>
+                <span class="detail-value" id="profileLevel">Senior Four (S4)</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Combination</span>
+                <span class="detail-value" id="profileCombo">History, Geography, Literature, and Psychology</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Expected Graduation</span>
+                <span class="detail-value" id="profileGrad">2028</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-objective-col reveal-on-scroll delay-200">
+          <div class="objective-box">
+            <h4 class="objective-title">
+              <i class="fa-solid fa-bullseye"></i>
+              Career Objective & Vision
+            </h4>
+            <p class="objective-text" id="careerObjective">
+              "Motivated Senior Four student with a strong interest in humanities, communication, and media-related activities. Seeking opportunities to grow academically and socially while developing leadership and communication abilities in preparation for future professional and community involvement."
+            </p>
+          </div>
+
+          <!-- Quick facts summary card -->
+          <div class="about-card" style="margin-top: 2rem;">
+            <h3 style="font-size: 1.15rem; margin-bottom: 1.25rem;">Core Identity Pillars</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="color: var(--color-blue-primary); font-size: 1.3rem;"><i class="fa-solid fa-film"></i></div>
+                <div>
+                  <strong>Visual & Acoustic Storytelling</strong>
+                  <p style="font-size: 0.88rem; color: var(--color-text-secondary);">Directing video captures, multi-camera event tracking, and live audio balance.</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="color: var(--color-blue-light); font-size: 1.3rem;"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                <div>
+                  <strong>Youth Advocacy & Community Leadership</strong>
+                  <p style="font-size: 0.88rem; color: var(--color-text-secondary);">Empowering peers through Share Blessing Initiative and HeForShe campaigns.</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="color: var(--color-blue-primary); font-size: 1.3rem;"><i class="fa-solid fa-gears"></i></div>
+                <div>
+                  <strong>Mechanic & Electronic Exploration</strong>
+                  <p style="font-size: 0.88rem; color: var(--color-text-secondary);">Inquisitive interest in technical hardware, mechanical drafting, and sound systems.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Media & Video Showcase Gallery (Featuring Youth Voices & ASYV Campus Life) -->
+  <section class="section" id="gallery" style="background-color: var(--color-bg-surface);">
+    <div class="container">
+      <div style="text-align: center;" class="reveal-on-scroll">
+        <span class="section-tag">Cinematic Portfolio</span>
+        <h2 class="section-title">Featured <span class="blue-gradient-text">Media & Video</span> Gallery</h2>
+        <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">
+          Explore videography highlights (including <em>Youth Voices & ASYV Campus Life</em>), event documentaries, portraits, and sound engineering sessions captured across Rwanda.
+        </p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="gallery-controls reveal-on-scroll">
+        <button class="filter-btn active" data-filter="all">All Works</button>
+        <button class="filter-btn" data-filter="videography">Videography & Films</button>
+        <button class="filter-btn" data-filter="photography">Photography</button>
+        <button class="filter-btn" data-filter="audio">Audio & Sound</button>
+      </div>
+
+      <!-- Gallery Grid (Dynamically Populated) -->
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Rendered via js/app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Leadership & Memberships Section -->
+  <section class="section" id="leadership">
+    <div class="container">
+      <div class="reveal-on-scroll">
+        <span class="section-tag">Leadership & Organizations</span>
+        <h2 class="section-title">Community & <span class="blue-gradient-text">Student Leadership</span></h2>
+        <p class="section-subtitle">
+          Demonstrating accountability, communication governance, and service to fellow students and community members.
+        </p>
+      </div>
+
+      <div class="cards-grid-3" id="leadershipGrid">
+        <!-- Main Leadership Position -->
+        <div class="feature-card highlight reveal-on-scroll">
+          <div class="card-icon-wrap">
+            <i class="fa-solid fa-bullhorn"></i>
+          </div>
+          <h3 class="feature-card-title">Share Blessing Initiative</h3>
+          <span class="feature-card-role">Minister of Communication</span>
+          <p class="feature-card-desc">
+            Directs executive public messaging, campus announcements, and manages media documentation during humanitarian outreach campaigns aimed at supporting vulnerable community members.
+          </p>
+        </div>
+
+        <!-- Membership 1: Media Club -->
+        <div class="feature-card reveal-on-scroll delay-100">
+          <div class="card-icon-wrap">
+            <i class="fa-solid fa-video"></i>
+          </div>
+          <h3 class="feature-card-title">Media Club</h3>
+          <span class="feature-card-role">Active Creator & Operator</span>
+          <p class="feature-card-desc">
+            Leads camera setups, live event coverage, audio balancing, and video production for major ceremonies, school assemblies, and sports meets.
+          </p>
+        </div>
+
+        <!-- Membership 2: HeForShe -->
+        <div class="feature-card reveal-on-scroll delay-200">
+          <div class="card-icon-wrap">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <h3 class="feature-card-title">HeForShe Initiative</h3>
+          <span class="feature-card-role">Gender Equality Advocate</span>
+          <p class="feature-card-desc">
+            Promoting mutual respect, equal leadership participation, and active solidarity among high school students to advance gender justice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Achievements & Awards Spotlight -->
+  <section class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div class="achievement-spotlight reveal-on-scroll">
+        <div class="achievement-trophy-large">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div class="achievement-body">
+          <span class="achievement-tag">Official Recognition</span>
+          <h3 class="achievement-heading" id="awardTitle">Awarded First Place for Inspiring Others in Media, Photography & Video</h3>
+          <p class="achievement-meta">Conferred by Liquidnet Family High School @ Agahozo Shalom Youth Village</p>
+          <p class="achievement-desc" id="awardDesc">
+            Recognized for outstanding passion, dedication to mentoring peers in visual storytelling, delivering high-caliber documentary coverage for the campus, and inspiring fellow students through photography and videography excellence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Extracurricular & Technical Passions -->
+  <section class="section" id="passions" style="background-color: var(--color-bg-surface);">
+    <div class="container">
+      <div class="reveal-on-scroll">
+        <span class="section-tag">Interests & Pursuits</span>
+        <h2 class="section-title">Technical & <span class="blue-gradient-text">Athletic Passions</span></h2>
+        <p class="section-subtitle">
+          A blend of creative media craft, technical mechanics, sound engineering, and athletic teamwork.
+        </p>
+      </div>
+
+      <div class="passions-grid" id="passionsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Skills, Capabilities & Languages -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="skills-container-grid">
+        <!-- Skills Column -->
+        <div class="reveal-on-scroll">
+          <span class="section-tag">Competencies</span>
+          <h2 class="section-title">Skills & <span class="blue-gradient-text">Capabilities</span></h2>
+          <p class="section-subtitle" style="margin-bottom: 2rem;">
+            Hands-on technical aptitudes, digital proficiency, and interpersonal communication capabilities.
+          </p>
+
+          <div class="skills-list" id="skillsList">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Languages & DJing Highlight Column -->
+        <div class="reveal-on-scroll delay-200">
+          <span class="section-tag">Linguistic Proficiency</span>
+          <h2 class="section-title">Languages <span class="blue-gradient-text">Spoken</span></h2>
+          <p class="section-subtitle" style="margin-bottom: 2rem;">
+            Multilingual fluency facilitating broad collaboration and cross-cultural communication.
+          </p>
+
+          <div class="languages-list" id="languagesList">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Audio & DJing Highlight Card -->
+          <div class="about-card" style="margin-top: 2rem; border-color: var(--color-border);">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <span style="font-size: 1.5rem; color: var(--color-blue-primary);"><i class="fa-solid fa-headphones"></i></span>
+              <h3 style="font-size: 1.1rem; color: var(--color-blue-primary);">Acoustics & DJ Mixing</h3>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6;">
+              Skilled in handling live PA sound hardware, balancing multi-channel mixers, and providing live music curation (DJing) for youth events and assemblies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Contact Section -->
+  <section class="section" id="contact" style="background-color: var(--color-bg-surface);">
+    <div class="container">
+      <div class="reveal-on-scroll">
+        <span class="section-tag">Direct Inquiries</span>
+        <h2 class="section-title">Let’s Create <span class="blue-gradient-text">Something Impactful</span></h2>
+        <p class="section-subtitle">
+          Open to media collaborations, documentary video projects, photography assignments, and community leadership partnerships.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info-panel reveal-on-scroll">
+          <!-- Phone Tile -->
+          <div class="contact-tile">
+            <div class="contact-tile-icon">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contact-tile-details">
+              <strong>Direct Phone</strong>
+              <a href="tel:0792721384" id="contactPhone">0792721384</a>
+            </div>
+          </div>
+
+          <!-- Email Tile -->
+          <div class="contact-tile">
+            <div class="contact-tile-icon">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="contact-tile-details">
+              <strong>Email Address</strong>
+              <a href="mailto:augustinbizumuremyi24@gmail.com" id="contactEmail">augustinbizumuremyi24@gmail.com</a>
+            </div>
+          </div>
+
+          <!-- Location Tile -->
+          <div class="contact-tile">
+            <div class="contact-tile-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="contact-tile-details">
+              <strong>Location</strong>
+              <span id="contactLocation">Gisagara District, Southern Province, Rwanda</span>
+            </div>
+          </div>
+
+          <!-- School Tile -->
+          <div class="contact-tile">
+            <div class="contact-tile-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="contact-tile-details">
+              <strong>School & Campus</strong>
+              <span>Liquidnet Family High School @ ASYV</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Message Form (Direct Delivery to augustinbizumuremyi24@gmail.com) -->
+        <div class="contact-form-card reveal-on-scroll delay-200">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h3 style="font-size: 1.35rem; margin: 0;">Send a Message</h3>
+            <span style="font-size: 0.8rem; color: var(--color-blue-primary); font-weight: 600;">
+              Delivered to: augustinbizumuremyi24@gmail.com
+            </span>
+          </div>
+          <form id="contactForm">
+            <div class="form-group">
+              <label class="form-label" for="senderName">Your Name</label>
+              <input type="text" id="senderName" class="form-input" placeholder="e.g. Jean Paul" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="senderEmail">Your Email</label>
+              <input type="email" id="senderEmail" class="form-input" placeholder="e.g. name@example.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="senderSubject">Subject</label>
+              <input type="text" id="senderSubject" class="form-input" placeholder="e.g. Videography Collaboration Inquiry" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="senderMessage">Message</label>
+              <textarea id="senderMessage" class="form-textarea" placeholder="Describe your project, timeline, or inquiry..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Send to Augustin (augustinbizumuremyi24@gmail.com)</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#hero" class="nav-brand" style="margin-bottom: 0.5rem; display: inline-flex;">
+            <div class="brand-badge">BA</div>
+            <span>Bizumuremyi Augustin</span>
+          </a>
+          <p style="color: var(--color-text-secondary); font-size: 0.88rem; max-width: 450px;">
+            Videographer, Photographer, Media Specialist, & Humanities Student at Liquidnet Family High School @ ASYV, Rwanda.
+          </p>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Showcase</a></li>
+          <li><a href="#leadership">Leadership</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear">2026</span> Bizumuremyi Augustin. All Rights Reserved.</p>
+        <button id="footerAdminBtn" style="background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 0.82rem; display: flex; align-items: center; gap: 0.4rem;">
+          <i class="fa-solid fa-lock"></i>
+          <span>Admin Portal</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal (Full Video Player & Photo Zoom) -->
+  <div class="modal-overlay" id="lightboxModal" aria-hidden="true" role="dialog">
+    <div class="modal-content-wrapper modal-animate-in">
+      <button class="modal-close-btn" id="closeLightboxBtn" aria-label="Close Lightbox">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="lightbox-player-box" id="lightboxPlayer"></div>
+      <div class="lightbox-details">
+        <span class="media-category-tag" id="lightboxCategory">Videography</span>
+        <h3 class="lightbox-title" id="lightboxTitle">Project Title</h3>
+        <p class="lightbox-desc" id="lightboxDesc">Detailed narrative describing the project capture, visual goals, and story.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Protected Admin Login Modal (Secret PIN - No visible password!) -->
+  <div class="modal-overlay" id="adminModal" aria-hidden="true" role="dialog">
+    <div class="admin-modal-card modal-animate-in">
+      <button class="modal-close-btn" id="closeAdminBtn" aria-label="Close Admin Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="admin-modal-header">
+        <div class="admin-modal-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h2 class="admin-modal-title">Admin Portal Login</h2>
+        <p class="admin-modal-desc">
+          Enter your confidential admin PIN to access the full CMS dashboard and upload media live to Supabase.
+        </p>
+      </div>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label" for="adminPinInput">
+            <i class="fa-solid fa-key" style="margin-right: 0.25rem;"></i> Secret Admin PIN
+          </label>
+          <input type="password" id="adminPinInput" class="form-input" placeholder="Enter Admin PIN" required autofocus autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <span>LOG IN TO DASHBOARD</span>
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Supabase CDN Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Supabase Config & Services -->
+  <script src="js/supabase-config.js"></script>
+  <!-- Custom Trailing Target Cursor -->
+  <script src="js/cursor.js"></script>
+  <!-- Main Portfolio Dynamic Engine -->
+  <script src="js/app.js"></script>
+  <!-- Protected Admin Dashboard Engine -->
+  <script src="js/admin.js"></script>
+</body>
+</html>
