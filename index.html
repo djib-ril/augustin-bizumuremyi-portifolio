@@ -115,8 +115,19 @@
           <div class="revolving-blue-ring-outer"></div>
           <div class="orbit-sparkle"></div>
 
-          <div class="portrait-circle-frame">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Bizumuremyi Augustin" id="heroProfileImg">
+          <div class="portrait-circle-frame" id="heroProfileContainer">
+            <!-- Active Loading State ("Loading image...") -->
+            <div class="image-loading-placeholder" id="heroImageLoader">
+              <div class="loader-spinner"></div>
+              <span class="loader-text">Loading image...</span>
+            </div>
+            <!-- Dynamic Profile Image -->
+            <img id="heroProfileImg" alt="Bizumuremyi Augustin" class="hero-avatar-img" style="display: none;">
+            <!-- Fallback Initials Avatar if image fails or empty -->
+            <div class="avatar-fallback-placeholder" id="heroAvatarFallback" style="display: none;">
+              <span class="avatar-initials">BA</span>
+              <span class="avatar-sub">Augustin</span>
+            </div>
           </div>
 
           <!-- Floating Badges -->
@@ -460,7 +471,7 @@
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%;">
               <i class="fa-solid fa-paper-plane"></i>
-              <span>Send to Augustin (augustinbizumuremyi24@gmail.com)</span>
+              <span>Send Message</span>
             </button>
           </form>
         </div>

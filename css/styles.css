@@ -509,17 +509,120 @@ img, video {
   background-color: var(--color-bg-card);
   box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.portrait-circle-frame img {
+.portrait-circle-frame img.hero-avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-smooth);
+  transition: transform var(--transition-smooth), opacity 0.4s ease;
+  opacity: 0;
 }
 
-.portrait-circle-frame:hover img {
+.portrait-circle-frame img.hero-avatar-img.loaded {
+  opacity: 1;
+}
+
+.portrait-circle-frame:hover img.hero-avatar-img {
   transform: scale(1.05);
+}
+
+/* Active Image Loading Skeleton & Spinner */
+.image-loading-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, rgba(14, 22, 38, 0.95), rgba(19, 30, 51, 0.95));
+  z-index: 3;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.image-loading-placeholder.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid rgba(56, 189, 248, 0.2);
+  border-top-color: var(--color-blue-primary);
+  border-right-color: var(--color-blue-light);
+  animation: spinnerRotate 0.8s linear infinite;
+  box-shadow: 0 0 15px var(--color-blue-glow);
+}
+
+.loader-spinner.mini {
+  width: 22px;
+  height: 22px;
+  border-width: 2.5px;
+}
+
+.loader-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-blue-light);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  animation: pulseOpacity 1.5s ease-in-out infinite;
+}
+
+@keyframes spinnerRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulseOpacity {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Fallback Initials Avatar */
+.avatar-fallback-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, var(--color-bg-card-hover) 0%, var(--color-bg-card) 100%);
+  color: var(--color-blue-primary);
+  z-index: 2;
+  user-select: none;
+}
+
+.avatar-fallback-placeholder .avatar-initials {
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-family: var(--font-sans);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--color-blue-primary), var(--color-blue-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 12px var(--color-blue-glow));
+}
+
+.avatar-fallback-placeholder .avatar-sub {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-top: 0.25rem;
 }
 
 /* Floating Badges around Portrait */

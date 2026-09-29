@@ -27,7 +27,7 @@ const DEFAULT_PORTFOLIO_DATA = {
     fullName: "Bizumuremyi Augustin",
     heroGreeting: "Hello, I'm",
     role: "Videographer, Photographer, Media Specialist, & Humanities Student",
-    heroImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    heroImage: "",
     phone: "0792721384",
     email: "augustinbizumuremyi24@gmail.com",
     location: "Gisagara District, Rwanda",
@@ -311,6 +311,38 @@ const PortfolioService = {
   async resetDefaults() {
     localStorage.removeItem(STORAGE_KEY);
     return await this.savePortfolioData(DEFAULT_PORTFOLIO_DATA);
+  },
+
+  /**
+   * Realtime Subscription to instant updates from Supabase
+   * Allows anyone with the portfolio link to see updates immediately
+   */
+  subscribeToPortfolioUpdates(callback) {
+    if (!supabaseClient) return null;
+    try {
+      const channel = supabaseClient
+        .channel('realtime_portfolio_changes')
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: TABLE_NAME },
+          (payload) => {
+            console.log("Supabase Realtime update received:", payload);
+            if (payload && payload.new && payload.new.content) {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(payload.new.content));
+              if (typeof callback === 'function') {
+                callback(payload.new.content);
+              }
+            }
+          }
+        )
+        .subscribe((status) => {
+          console.log("Realtime subscription status:", status);
+        });
+      return channel;
+    } catch (e) {
+      console.warn("Could not subscribe to Realtime:", e);
+      return null;
+    }
   },
 
   /**

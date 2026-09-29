@@ -25,8 +25,39 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Listen for data updates from Admin Panel
   window.addEventListener('portfolioDataUpdated', (e) => {
     console.log("Portfolio data update detected, refreshing views...");
-    renderPortfolio(e.detail || window.currentPortfolioData);
+    window.currentPortfolioData = e.detail || window.currentPortfolioData;
+    renderPortfolio(window.currentPortfolioData);
   });
+
+  // Realtime Supabase Subscription: Anyone with the portfolio link sees changes immediately
+  if (window.PortfolioService && window.PortfolioService.subscribeToPortfolioUpdates) {
+    window.PortfolioService.subscribeToPortfolioUpdates((updatedData) => {
+      console.log("Realtime update received from Supabase, applying live...");
+      window.currentPortfolioData = updatedData;
+      renderPortfolio(updatedData);
+    });
+  }
+
+  // Cross-tab synchronization
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'augustin_portfolio_local_cache' && e.newValue) {
+      try {
+        const parsed = JSON.parse(e.newValue);
+        window.currentPortfolioData = parsed;
+        renderPortfolio(parsed);
+      } catch (err) {}
+    }
+  });
+
+  // Re-check when window regains focus
+  window.addEventListener('focus', () => {
+    loadAndRenderPortfolio();
+  });
+
+  // Heartbeat check every 15s so changes are guaranteed to update without hard refresh
+  setInterval(() => {
+    loadAndRenderPortfolio();
+  }, 15000);
 });
 
 // State Store
@@ -64,11 +95,43 @@ function renderPortfolio(data) {
     setSafeText('heroLocation', p.location || "Gisagara District, Rwanda");
     setSafeText('heroLevel', `${p.level || "Senior Four (S4)"} • Class of ${p.graduationYear || "2028"}`);
 
-    // Hero Profile Picture with revolving bright blue ring
+    // Hero Profile Picture with active loading state & fallback avatar
     const heroProfileImg = document.getElementById('heroProfileImg');
-    if (heroProfileImg && p.heroImage) {
-      heroProfileImg.src = p.heroImage;
-      heroProfileImg.alt = p.fullName || "Bizumuremyi Augustin";
+    const heroImageLoader = document.getElementById('heroImageLoader');
+    const heroAvatarFallback = document.getElementById('heroAvatarFallback');
+
+    if (p.heroImage && p.heroImage.trim() !== '') {
+      const preloader = new Image();
+      preloader.src = p.heroImage;
+
+      preloader.onload = () => {
+        if (heroProfileImg) {
+          heroProfileImg.src = p.heroImage;
+          heroProfileImg.alt = p.fullName || "Bizumuremyi Augustin";
+          heroProfileImg.style.display = 'block';
+          requestAnimationFrame(() => {
+            heroProfileImg.classList.add('loaded');
+          });
+        }
+        if (heroImageLoader) {
+          heroImageLoader.classList.add('fade-out');
+          setTimeout(() => { heroImageLoader.style.display = 'none'; }, 300);
+        }
+        if (heroAvatarFallback) {
+          heroAvatarFallback.style.display = 'none';
+        }
+      };
+
+      preloader.onerror = () => {
+        console.warn("Could not load custom hero image, displaying initials avatar.");
+        if (heroImageLoader) heroImageLoader.style.display = 'none';
+        if (heroProfileImg) heroProfileImg.style.display = 'none';
+        if (heroAvatarFallback) heroAvatarFallback.style.display = 'flex';
+      };
+    } else {
+      if (heroImageLoader) heroImageLoader.style.display = 'none';
+      if (heroProfileImg) heroProfileImg.style.display = 'none';
+      if (heroAvatarFallback) heroAvatarFallback.style.display = 'flex';
     }
 
     setSafeText('aboutBio', p.aboutBio || `Bizumuremyi Augustin is a dedicated ${p.level || "Senior Four"} student currently pursuing his secondary education at ${p.school || "Liquidnet Family High School @ ASYV"}. Balancing deep academic curiosity with high-energy visual production, Augustin captures the pulse of student initiatives, cultural storytelling, and community service across Rwanda.`);

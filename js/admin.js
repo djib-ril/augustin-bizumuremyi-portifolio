@@ -170,13 +170,42 @@ function populateAdminDashboard(data) {
     setVal('inputHeroImagePath', p.heroImage || "");
 
     const preview = document.getElementById('heroImagePreview');
-    if (preview && p.heroImage) {
-      preview.src = p.heroImage;
-    }
+    const heroLoader = document.getElementById('adminHeroImageLoader');
+    const heroFallback = document.getElementById('adminAvatarFallback');
 
     const sidebarAvatar = document.getElementById('sidebarAvatar');
-    if (sidebarAvatar && p.heroImage) {
-      sidebarAvatar.src = p.heroImage;
+    const sidebarLoader = document.getElementById('sidebarAvatarLoader');
+    const sidebarFallback = document.getElementById('sidebarAvatarFallback');
+
+    if (p.heroImage && p.heroImage.trim() !== '') {
+      const testImg = new Image();
+      testImg.src = p.heroImage;
+      testImg.onload = () => {
+        if (heroLoader) heroLoader.style.display = 'none';
+        if (heroFallback) heroFallback.style.display = 'none';
+        if (preview) { preview.src = p.heroImage; preview.style.display = 'block'; }
+
+        if (sidebarLoader) sidebarLoader.style.display = 'none';
+        if (sidebarFallback) sidebarFallback.style.display = 'none';
+        if (sidebarAvatar) { sidebarAvatar.src = p.heroImage; sidebarAvatar.style.display = 'block'; }
+      };
+      testImg.onerror = () => {
+        if (heroLoader) heroLoader.style.display = 'none';
+        if (preview) preview.style.display = 'none';
+        if (heroFallback) heroFallback.style.display = 'flex';
+
+        if (sidebarLoader) sidebarLoader.style.display = 'none';
+        if (sidebarAvatar) sidebarAvatar.style.display = 'none';
+        if (sidebarFallback) sidebarFallback.style.display = 'flex';
+      };
+    } else {
+      if (heroLoader) heroLoader.style.display = 'none';
+      if (preview) preview.style.display = 'none';
+      if (heroFallback) heroFallback.style.display = 'flex';
+
+      if (sidebarLoader) sidebarLoader.style.display = 'none';
+      if (sidebarAvatar) sidebarAvatar.style.display = 'none';
+      if (sidebarFallback) sidebarFallback.style.display = 'flex';
     }
 
     const sidebarName = document.getElementById('sidebarUserName');
@@ -233,8 +262,18 @@ function setupHeroImageUploader() {
         const reader = new FileReader();
         reader.onload = (event) => {
           const dataUrl = event.target.result;
-          if (preview) preview.src = dataUrl;
-          if (sidebarAvatar) sidebarAvatar.src = dataUrl;
+          const heroLoader = document.getElementById('adminHeroImageLoader');
+          const heroFallback = document.getElementById('adminAvatarFallback');
+          const sidebarLoader = document.getElementById('sidebarAvatarLoader');
+          const sidebarFallback = document.getElementById('sidebarAvatarFallback');
+
+          if (heroLoader) heroLoader.style.display = 'none';
+          if (heroFallback) heroFallback.style.display = 'none';
+          if (sidebarLoader) sidebarLoader.style.display = 'none';
+          if (sidebarFallback) sidebarFallback.style.display = 'none';
+
+          if (preview) { preview.src = dataUrl; preview.style.display = 'block'; }
+          if (sidebarAvatar) { sidebarAvatar.src = dataUrl; sidebarAvatar.style.display = 'block'; }
           if (pathInput) pathInput.value = dataUrl;
           if (adminPortfolioData && adminPortfolioData.profile) {
             adminPortfolioData.profile.heroImage = dataUrl;
@@ -249,12 +288,26 @@ function setupHeroImageUploader() {
   if (pathInput) {
     pathInput.addEventListener('input', () => {
       const val = pathInput.value.trim();
-      if (val && preview) {
-        preview.src = val;
-        if (sidebarAvatar) sidebarAvatar.src = val;
+      const heroLoader = document.getElementById('adminHeroImageLoader');
+      const heroFallback = document.getElementById('adminAvatarFallback');
+      const sidebarLoader = document.getElementById('sidebarAvatarLoader');
+      const sidebarFallback = document.getElementById('sidebarAvatarFallback');
+
+      if (val) {
+        if (heroLoader) heroLoader.style.display = 'none';
+        if (heroFallback) heroFallback.style.display = 'none';
+        if (sidebarLoader) sidebarLoader.style.display = 'none';
+        if (sidebarFallback) sidebarFallback.style.display = 'none';
+        if (preview) { preview.src = val; preview.style.display = 'block'; }
+        if (sidebarAvatar) { sidebarAvatar.src = val; sidebarAvatar.style.display = 'block'; }
         if (adminPortfolioData && adminPortfolioData.profile) {
           adminPortfolioData.profile.heroImage = val;
         }
+      } else {
+        if (preview) preview.style.display = 'none';
+        if (sidebarAvatar) sidebarAvatar.style.display = 'none';
+        if (heroFallback) heroFallback.style.display = 'flex';
+        if (sidebarFallback) sidebarFallback.style.display = 'flex';
       }
     });
   }

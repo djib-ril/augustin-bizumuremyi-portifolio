@@ -47,7 +47,13 @@
     <!-- Sidebar Navigation -->
     <aside class="admin-sidebar">
       <div class="sidebar-user">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" id="sidebarAvatar" alt="Admin Avatar" class="sidebar-avatar">
+        <div class="sidebar-avatar-wrapper">
+          <div class="image-loading-placeholder mini" id="sidebarAvatarLoader">
+            <div class="loader-spinner mini"></div>
+          </div>
+          <div class="avatar-fallback-placeholder mini" id="sidebarAvatarFallback" style="display: none;">BA</div>
+          <img id="sidebarAvatar" alt="Admin Avatar" class="sidebar-avatar" style="display: none;">
+        </div>
         <div>
           <strong id="sidebarUserName">Bizumuremyi Augustin</strong>
           <span class="user-role">Administrator</span>
@@ -117,8 +123,15 @@
             <div class="form-row-2 image-uploader-row">
               <div class="image-preview-box">
                 <label>Profile Picture (Revolving Blue Ring)</label>
-                <div class="preview-arch-container">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" id="heroImagePreview" alt="Profile Preview">
+                <div class="preview-arch-container" id="adminHeroPreviewContainer">
+                  <div class="image-loading-placeholder" id="adminHeroImageLoader">
+                    <div class="loader-spinner"></div>
+                    <span class="loader-text">Loading image...</span>
+                  </div>
+                  <div class="avatar-fallback-placeholder" id="adminAvatarFallback" style="display: none;">
+                    <span class="avatar-initials">BA</span>
+                  </div>
+                  <img id="heroImagePreview" alt="Profile Preview" style="display: none;">
                 </div>
               </div>
 
