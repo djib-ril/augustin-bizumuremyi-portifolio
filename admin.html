@@ -407,6 +407,99 @@
     </main>
   </div>
 
+  <!-- Edit Media Project Modal -->
+  <div class="admin-modal-overlay" id="editMediaModal" aria-hidden="true" role="dialog">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <div style="display: flex; align-items: center; gap: 0.85rem;">
+          <div class="admin-modal-icon">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <div>
+            <h2 class="admin-modal-title">Edit Showcase Project</h2>
+            <p class="admin-modal-desc">Modify project details, replace video/photo files, or update captions.</p>
+          </div>
+        </div>
+        <button type="button" class="admin-modal-close-btn" id="closeEditMediaModalBtn" aria-label="Close Edit Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="admin-modal-body">
+        <input type="hidden" id="editMediaId">
+
+        <!-- Live Media Preview Box -->
+        <div class="edit-media-preview-container">
+          <div class="edit-media-preview-label">
+            <i class="fa-solid fa-eye"></i> Current Media Preview
+          </div>
+          <div class="edit-media-preview-box" id="editMediaPreviewBox">
+            <p style="color: var(--admin-text-muted); font-size: 0.85rem;">No media preview available</p>
+          </div>
+        </div>
+
+        <!-- Replace File Dropzone -->
+        <div class="file-dropzone edit-dropzone" id="editMediaFileDropzone" style="margin-bottom: 1.25rem;">
+          <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+          <strong style="color: var(--admin-text-main);">Upload Replacement Picture or Video File</strong>
+          <span style="font-size: 0.8rem; color: var(--admin-text-muted);">Select or drag a new file to replace the existing media (MP4, WebM, JPG, PNG, WEBP)</span>
+          <input type="file" id="editMediaFileInput" accept="image/*,video/mp4,video/webm" class="file-input-hidden">
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="editMediaTitle">Project Title</label>
+            <input type="text" id="editMediaTitle" class="form-input" placeholder="e.g. ASYV Cultural Night Documentary">
+          </div>
+          <div class="form-group">
+            <label for="editMediaCategory">Category</label>
+            <select id="editMediaCategory" class="form-select">
+              <option value="videography">Videography & Films</option>
+              <option value="photography">Photography</option>
+              <option value="audio">Audio & Sound</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="editMediaType">Media Format</label>
+            <select id="editMediaType" class="form-select">
+              <option value="youtube">YouTube Video</option>
+              <option value="vimeo">Vimeo Video</option>
+              <option value="image">High-Resolution Photo</option>
+              <option value="video">Direct HTML5 Video</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editMediaUrl">Media URL / File Source</label>
+            <input type="text" id="editMediaUrl" class="form-input" placeholder="https://youtube.com/watch?v=... or base64 file source">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="editMediaThumb">Custom Thumbnail Poster URL (Optional)</label>
+          <input type="text" id="editMediaThumb" class="form-input" placeholder="Thumbnail image URL (leave empty for auto-detect)">
+        </div>
+
+        <div class="form-group">
+          <label for="editMediaDesc">Project Description & Story</label>
+          <textarea id="editMediaDesc" class="form-textarea" rows="3" placeholder="Brief narrative about the project capture, visual goals, and story..."></textarea>
+        </div>
+      </div>
+
+      <div class="admin-modal-footer">
+        <button type="button" id="cancelEditMediaBtn" class="btn btn-outline btn-sm">
+          <span>Cancel</span>
+        </button>
+        <button type="button" id="saveEditMediaBtn" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>Save Changes</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div id="toastNotification" class="toast-notification"></div>
 

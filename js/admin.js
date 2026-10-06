@@ -117,6 +117,7 @@ async function initStandaloneAdminDashboard() {
 
   // Setup Media & Video Uploader (Showcase Gallery)
   setupMediaUploader();
+  setupEditMediaModal();
 
   // Setup Skills CRUD
   setupSkillsManager();
@@ -429,6 +430,10 @@ function renderAdminMediaGrid(items) {
           <span style="font-size: 0.72rem; color: var(--admin-blue); text-transform: uppercase; font-weight: 700; margin-bottom: 0.25rem;">${escapeHtml(item.category)}</span>
           <p class="admin-media-desc">${escapeHtml(item.description || "No description provided.")}</p>
           <div class="admin-media-actions">
+            <button type="button" class="btn-action-edit" onclick="openEditMediaModal('${item.id}')" title="Edit this project">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <span>Edit</span>
+            </button>
             <button type="button" class="btn-icon-danger" onclick="deleteAdminMediaItem('${item.id}')" title="Delete Item">
               <i class="fa-solid fa-trash"></i>
             </button>
@@ -447,6 +452,210 @@ window.deleteAdminMediaItem = function(id) {
     showAdminToast("Media item removed. Click 'Save All Changes' to sync.");
   }
 };
+
+/**
+ * Setup Edit Media Modal handlers and live preview updates
+ */
+function setupEditMediaModal() {
+  const modal = document.getElementById('editMediaModal');
+  const closeBtn = document.getElementById('closeEditMediaModalBtn');
+  const cancelBtn = document.getElementById('cancelEditMediaBtn');
+  const saveBtn = document.getElementById('saveEditMediaBtn');
+  const fileInput = document.getElementById('editMediaFileInput');
+  const urlInput = document.getElementById('editMediaUrl');
+  const typeSelect = document.getElementById('editMediaType');
+  const thumbInput = document.getElementById('editMediaThumb');
+
+  function closeModal() {
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Replacement file upload
+  if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const isVideo = file.type.startsWith('video');
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target.result;
+        if (urlInput) urlInput.value = dataUrl;
+        if (typeSelect) typeSelect.value = isVideo ? 'video' : 'image';
+        updateEditMediaPreview();
+        showAdminToast(`Loaded replacement ${isVideo ? 'video' : 'picture'} file! Click 'Save Changes' to apply.`);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Live preview listeners
+  if (urlInput) urlInput.addEventListener('input', updateEditMediaPreview);
+  if (typeSelect) typeSelect.addEventListener('change', updateEditMediaPreview);
+  if (thumbInput) thumbInput.addEventListener('input', updateEditMediaPreview);
+
+  // Save changes
+  if (saveBtn) {
+    saveBtn.addEventListener('click', async () => {
+      const id = document.getElementById('editMediaId')?.value;
+      if (!id || !adminPortfolioData || !adminPortfolioData.mediaItems) return;
+
+      const item = adminPortfolioData.mediaItems.find(i => i.id === id);
+      if (!item) {
+        showAdminToast("Could not find project to update.", "error");
+        return;
+      }
+
+      const title = getVal('editMediaTitle');
+      const category = getVal('editMediaCategory');
+      const type = getVal('editMediaType');
+      const url = getVal('editMediaUrl');
+      let thumb = getVal('editMediaThumb');
+      const desc = getVal('editMediaDesc');
+
+      if (!title || !url) {
+        alert("Please provide at least a project title and media URL or file source.");
+        return;
+      }
+
+      // Auto detect thumbnail if empty
+      if (!thumb) {
+        const parsed = window.PortfolioService.parseVideoUrl(url);
+        if (parsed && parsed.thumbnailUrl) {
+          thumb = parsed.thumbnailUrl;
+        } else if (type === 'image') {
+          thumb = url;
+        } else {
+          thumb = item.thumbnail || "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80";
+        }
+      }
+
+      // Update the item
+      item.title = title;
+      item.category = category;
+      item.type = type;
+      item.url = url;
+      item.thumbnail = thumb;
+      item.description = desc;
+
+      renderAdminMediaGrid(adminPortfolioData.mediaItems);
+
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Saving...</span>`;
+
+      // Save directly to Supabase & cache
+      const saveRes = await window.PortfolioService.savePortfolioData(adminPortfolioData);
+
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span>Save Changes</span>`;
+
+      closeModal();
+
+      if (saveRes && saveRes.success) {
+        showAdminToast("Project updated and saved live to Supabase successfully!");
+      } else {
+        showAdminToast("Project updated in local session. Remember to click 'Save All Changes'.");
+      }
+    });
+  }
+}
+
+/**
+ * Open Edit Media Modal for a specific item
+ */
+window.openEditMediaModal = function(id) {
+  if (!adminPortfolioData || !adminPortfolioData.mediaItems) return;
+  const item = adminPortfolioData.mediaItems.find(i => i.id === id);
+  if (!item) return;
+
+  const modal = document.getElementById('editMediaModal');
+  if (!modal) return;
+
+  setVal('editMediaId', item.id);
+  setVal('editMediaTitle', item.title || '');
+  setVal('editMediaCategory', item.category || 'videography');
+  setVal('editMediaType', item.type || 'youtube');
+  setVal('editMediaUrl', item.url || '');
+  setVal('editMediaThumb', item.thumbnail || '');
+  setVal('editMediaDesc', item.description || '');
+
+  const fileInput = document.getElementById('editMediaFileInput');
+  if (fileInput) fileInput.value = '';
+
+  updateEditMediaPreview();
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+/**
+ * Update the preview box inside the Edit Media Modal
+ */
+function updateEditMediaPreview() {
+  const box = document.getElementById('editMediaPreviewBox');
+  if (!box) return;
+
+  const type = getVal('editMediaType');
+  const url = getVal('editMediaUrl');
+  let thumb = getVal('editMediaThumb');
+
+  if (!url && !thumb) {
+    box.innerHTML = `<p style="color: var(--admin-text-muted); font-size: 0.85rem;">No media source provided yet.</p>`;
+    return;
+  }
+
+  if (type === 'image') {
+    box.innerHTML = `<img src="${url || thumb}" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;">`;
+    return;
+  }
+
+  if (type === 'video') {
+    box.innerHTML = `<video src="${url}" controls style="width: 100%; height: 100%; object-fit: contain; max-height: 190px;"></video>`;
+    return;
+  }
+
+  const parsed = window.PortfolioService.parseVideoUrl(url);
+  if (parsed && parsed.embedUrl) {
+    box.innerHTML = `<iframe src="${parsed.embedUrl}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 100%; border: none;"></iframe>`;
+    return;
+  }
+
+  if (!thumb && parsed && parsed.thumbnailUrl) {
+    thumb = parsed.thumbnailUrl;
+  }
+
+  if (thumb) {
+    box.innerHTML = `
+      <div style="position: relative; width: 100%; height: 100%;">
+        <img src="${thumb}" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4);">
+          <i class="fa-solid fa-play" style="font-size: 2rem; color: var(--admin-blue);"></i>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  box.innerHTML = `<p style="color: var(--admin-text-muted); font-size: 0.85rem;">Source URL entered: ${escapeHtml(url)}</p>`;
+}
 
 /**
  * Skills Manager
